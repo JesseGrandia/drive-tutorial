@@ -17,7 +17,7 @@ export type Folder = {
 export const mockFolders: Folder[] = [
   {
     id: "root",
-    name: "root",
+    name: "MyDrive",
     type: "folder",
     parent: null,
   },
