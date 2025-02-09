@@ -12,12 +12,18 @@ export default function GoogleDriveClone() {
 
   const navigateToFolder = (folder: File) => {
     setCurrentFolder(folder)
-    setBreadcrumbs([...breadcrumbs, folder])
+    setBreadcrumbs((prev) => [...prev, folder])
   }
 
   const navigateToBreadcrumb = (index: number) => {
-    setCurrentFolder(breadcrumbs[index])
-    setBreadcrumbs(breadcrumbs.slice(0, index + 1))
+    // Ensure the index is within bounds and the folder exists.
+    if (index >= 0 && index < breadcrumbs.length) {
+      const folder = breadcrumbs[index];
+      if (folder) {
+        setCurrentFolder(folder); // This will now only be called with a valid folder
+        setBreadcrumbs(breadcrumbs.slice(0, index + 1));
+      }
+    }
   }
 
   return (
@@ -61,14 +67,14 @@ export default function GoogleDriveClone() {
                     <span>{item.name}</span>
                   </div>
                 ) : (
-                  <Link href={item.url || "#"} className="flex items-center">
+                  <Link href={item.url ?? "#"} className="flex items-center">
                     <FileIcon className="mr-2 text-gray-400" />
                     <span>{item.name}</span>
                   </Link>
                 )}
               </div>
               <div className="col-span-3">{item.modifiedAt}</div>
-              <div className="col-span-3">{item.size || "-"}</div>
+              <div className="col-span-3">{item.size ?? "-"}</div>
             </div>
           ))}
         </div>
