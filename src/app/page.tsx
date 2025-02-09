@@ -16,7 +16,7 @@ export default function GoogleDriveClone() {
   }
 
   const navigateToBreadcrumb = (index: number) => {
-    // Ensure the index is within bounds and the folder exists
+    // Ensure the index is within bounds and the folder exists.
     if (index >= 0 && index < breadcrumbs.length) {
       const folder = breadcrumbs[index];
       if (folder) {
