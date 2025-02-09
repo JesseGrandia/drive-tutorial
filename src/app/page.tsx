@@ -12,7 +12,7 @@ export default function GoogleDriveClone() {
 
   const navigateToFolder = (folder: File) => {
     setCurrentFolder(folder)
-    setBreadcrumbs([...breadcrumbs, folder])
+    setBreadcrumbs((prev) => [...prev, folder])
   }
 
   const navigateToBreadcrumb = (index: number) => {
