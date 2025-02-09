@@ -1,36 +1,42 @@
 "use client"
 
-import { useState } from "react"
-import { type File, mockData } from "../lib/mockData"
-import { Folder, FileIcon, ChevronRight, Upload } from "lucide-react"
-import Link from "next/link"
-import { Button } from "~/components/ui/button"
+import { useState } from "react";
+import { type File, type Folder, mockData, mockFolders } from "../lib/mockData";
+import { Folder as FolderIcon, FileIcon, ChevronRight, Upload } from "lucide-react";
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
 
 export default function GoogleDriveClone() {
-  const [currentFolder, setCurrentFolder] = useState<File>(mockData)
-  const [breadcrumbs, setBreadcrumbs] = useState<File[]>([mockData])
+  // Initialize state with the root folder
+  const rootFolder = mockFolders.find((folder) => folder.id === "root")!;
+  const [currentFolder, setCurrentFolder] = useState<Folder>(rootFolder);
+  const [breadcrumbs, setBreadcrumbs] = useState<Folder[]>([rootFolder]);
 
-  const navigateToFolder = (folder: File) => {
-    setCurrentFolder(folder)
-    setBreadcrumbs((prev) => [...prev, folder])
-  }
+  // Function to navigate to a folder
+  const navigateToFolder = (folder: Folder) => {
+    setCurrentFolder(folder);
+    setBreadcrumbs((prev) => [...prev, folder]);
+  };
 
+  // Function to navigate back using breadcrumbs
   const navigateToBreadcrumb = (index: number) => {
-    // Ensure the index is within bounds and the folder exists.
     if (index >= 0 && index < breadcrumbs.length) {
       const folder = breadcrumbs[index];
       if (folder) {
-        setCurrentFolder(folder); // This will now only be called with a valid folder
+        setCurrentFolder(folder);
         setBreadcrumbs(breadcrumbs.slice(0, index + 1));
       }
     }
-  }
+  };
+
+  // Get folders and files inside the current folder
+  const childFolders = mockFolders.filter((folder) => folder.parent === currentFolder.id);
+  const childFiles = mockData.filter((file) => file.parent === currentFolder.id);
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 p-4">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold mb-6">Google Drive Clone</h1>
-
         {/* Breadcrumb navigation and Upload button */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center overflow-x-auto">
@@ -52,34 +58,42 @@ export default function GoogleDriveClone() {
         <div className="bg-gray-800 rounded-lg overflow-hidden">
           <div className="grid grid-cols-12 gap-4 p-4 border-b border-gray-700 font-semibold">
             <div className="col-span-6">Name</div>
-            <div className="col-span-3">Modified</div>
+
             <div className="col-span-3">Size</div>
+            <div className="col-span-3">Actions</div>
           </div>
-          {currentFolder.children?.map((item) => (
+          {childFolders.map((folder) => (
             <div
-              key={item.id}
+              key={folder.id}
+              className="grid grid-cols-12 gap-4 p-4 border-b border-gray-700 hover:bg-gray-700 transition-colors cursor-pointer"
+              onClick={() => navigateToFolder(folder)}
+            >
+              <div className="col-span-6 flex items-center">
+                <FolderIcon className="mr-2 text-yellow-500" />
+                <span>{folder.name}</span>
+              </div>
+              <div className="col-span-3">-</div>
+              <div className="col-span-3">-</div>
+            </div>
+          ))}
+          {childFiles.map((file) => (
+            <div
+              key={file.id}
               className="grid grid-cols-12 gap-4 p-4 border-b border-gray-700 hover:bg-gray-700 transition-colors"
             >
               <div className="col-span-6 flex items-center">
-                {item.type === "folder" ? (
-                  <div onClick={() => navigateToFolder(item)} className="flex items-center cursor-pointer">
-                    <Folder className="mr-2 text-yellow-500" />
-                    <span>{item.name}</span>
-                  </div>
-                ) : (
-                  <Link href={item.url ?? "#"} className="flex items-center">
-                    <FileIcon className="mr-2 text-gray-400" />
-                    <span>{item.name}</span>
-                  </Link>
-                )}
+                <Link href={file.url} className="flex items-center">
+                  <FileIcon className="mr-2 text-gray-400" />
+                  <span>{file.name}</span>
+                </Link>
               </div>
-              <div className="col-span-3">{item.modifiedAt}</div>
-              <div className="col-span-3">{item.size ?? "-"}</div>
+              <div className="col-span-3">{file.size}</div>
+              <div className="col-span-3">-</div>
             </div>
           ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
