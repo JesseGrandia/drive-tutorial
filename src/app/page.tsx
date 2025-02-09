@@ -74,7 +74,7 @@ export default function GoogleDriveClone() {
                 )}
               </div>
               <div className="col-span-3">{item.modifiedAt}</div>
-              <div className="col-span-3">{item.size || "-"}</div>
+              <div className="col-span-3">{item.size ?? "-"}</div>
             </div>
           ))}
         </div>
