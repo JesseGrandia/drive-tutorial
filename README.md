@@ -9,8 +9,9 @@
 - [ ] Add analytics
 
 ## 10/02/2025
-- [ ] Change folders to link components, remove all client state
+- [x] Change folders to link components, remove all client state
 - [ ] Clean up the database and data fetching patterns
 - [ ] Real homepage
 
-# Rn 1:27:20 ish
+# Rn 1:34:42 ish
+- Stuck in an infinite loop rn when fixing breadcrumbs XDDDDDDDDDDDD
