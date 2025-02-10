@@ -2,8 +2,10 @@ import "server-only";
 
 import { db } from "~/server/db";
 import {
-  files_table as filesSchema,
-  folders_table as foldersSchema,
+    files_table as filesSchema,
+    folders_table as foldersSchema,
+    type DB_FileType,
+    type DB_FolderType,
 } from "~/server/db/schema";
 import { eq } from "drizzle-orm";
 export const QUERIES = {
@@ -43,5 +45,21 @@ export const QUERIES = {
             .select()
             .from(filesSchema)
             .where(eq(filesSchema.parent, folderId));
+    },
+};
+
+export const MUTATIONS = {
+    createFile: async function (input: {
+        file: {
+            name: string,
+            size: number,
+            url: string,
+        };
+        userId: string;
+    }) {
+        return await db.insert(filesSchema).values({
+            ...input.file,
+            parent: 1,
+        });
     },
 };
