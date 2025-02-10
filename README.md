@@ -15,3 +15,4 @@
 - [ ] Delete files button
 - [ ] Allow files that aren't images to be uploaded
 
+# Low-key freaky close rn 2:23:36ish
