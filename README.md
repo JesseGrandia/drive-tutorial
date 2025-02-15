@@ -16,4 +16,4 @@
 - [ ] Allow files that aren't images to be uploaded
 - [ ] Real homepage
 
-# Low-key freaky close rn 2:23:36ish
+# Low-key freaky close rn 2:38:36ish

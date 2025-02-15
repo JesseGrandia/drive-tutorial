@@ -10,12 +10,12 @@ export default async function Sandbox() {
     throw new Error("User not found");
   }
 
-  const folders = await db
-    .select()
-    .from(folders_table)
-    .where(eq(folders_table.ownerId, user.userId));
+  // const folders = await db
+  //   .select()
+  //   .from(folders_table)
+  //   .where(eq(folders_table.ownerId, user.userId));
 
-  console.log(folders);
+  // console.log(folders);
 
   return (
     <div>
