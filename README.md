@@ -1,20 +1,14 @@
-# Drive Turoial
-
-## TODO
-
-- [x] Set up database and data model 
-- [x] Move folder open state URL 
-- [x] Add auth
-- [x] Add file uploadig 
-- [x] Add analytics
-- [x] Make sure sort order is consistent
-- [x] Add delete
-- [ ] Real homepage + onboarding
-
-# Low-key freaky close rn 2:38:36ish
-
 ## Solo strijd
 
 - [ ] Folder deletions
         Make sure to fetch all folders that have it as a parent,
         and their children too.
+- [ ] Folder creations
+        Make a server action that takes a name and parentId, and
+        creates a folder with that name and parentId (don't
+        forget to set the owner Id).
+- [ ] Access control
+        Check if user is owner before showing the folder page
+- [ ] Make a "file view" page
+- [ ] Toast! 
+- [ ] Gray out a row while it's being deleted 

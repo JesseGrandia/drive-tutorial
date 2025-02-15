@@ -9,7 +9,7 @@ import { PostHogProvider } from "./_providers/posthog-provider";
 export const metadata: Metadata = {
   title: "My JG Drive",
   description: "Google drive but worse ~JGspecial",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/IconTypeShi.ico" }],
 };
 
 export default function RootLayout({
