@@ -7,13 +7,7 @@
 - [x] Add auth
 - [x] Add file uploadig 
 - [ ] Add analytics
-
-## 10/02/2025
-
-- [x] Add "ownership" to files and folders
-- [x] Upload files to the right folder
-- [ ] Delete files button
-- [ ] Allow files that aren't images to be uploaded
-- [ ] Real homepage
+- [ ] Add delete
+- [ ] Real homepage + onboarding
 
 # Low-key freaky close rn 2:38:36ish
